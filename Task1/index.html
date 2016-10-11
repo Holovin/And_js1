@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="reset.css"/>
+        <link rel="stylesheet" type="text/css" href="main.css"/>
+        <title>D_and_task_1</title>
+    </head>
+
+    <body>
+        <div id="wrap">
+            <header>
+                <div id="logo">D / AND / Task 1</div>
+            </header>
+
+            <main>
+                <div id="input">
+                    <h2>Input drink</h2>
+
+                    <div class="center" id="drink_selector">
+                        <div class="arr_btn" id="drink_prev">< Prev</div>
+                        <div class="drink_name" id="drink_selected">[selected drink]</div>
+                        <div class="arr_btn" id="drink_next">Next ></div>
+                    </div>
+
+                    <div class="center" id="drink_selector_disp">
+                        <img id="cup" src="drink.png" draggable="true" class="cup">
+                    </div>
+
+                    <div class="center">
+                        <button class="green" id="add">Add to cocktail</button>
+                    </div>
+
+                    <div class="center">
+                        <span class="info">...or just drag'n'drop it to right</span>
+                    </div>
+
+
+                </div>
+
+                <div id="output">
+                    <h2>Output drink</h2>
+
+                    <div class="center">
+                        <div class="drink_name" id="drink_mixed">Empty</div>
+                    </div>
+
+                    <div class="center">
+                        <img src="drink.png" class="cup">
+                    </div>
+
+                    <div class="center">
+                        <button class="lime" id="mix" disabled="disabled">Mix it</button>
+                        <button class="red" id="drop">Drop the cup</button>
+                    </div>
+
+                    <div class="mosttop" id="hint">
+                    Move it here!
+                    </div>
+                </div>
+
+                <div id="result" class="mosttop">
+                    <h2>Mix results</h2>
+                    <div id="result_content"></div>
+                </div>
+            </main>
+        </div>
+
+    <script src="drinks.js"></script>
+    <script src="handlers.js"></script>
+    </body>
+
+</html>
