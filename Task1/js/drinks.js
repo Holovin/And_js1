@@ -64,7 +64,6 @@ Cocktails.prototype.find = function(ingrs) {
 var drinkInput = (function () {
     var _currentPosition;
     var _currentDrink;
-    var _selectedBlock;
 
     function _setPosition(pos) {
         var total = drinks.getLength();
@@ -78,15 +77,10 @@ var drinkInput = (function () {
         }
 
         _refreshDrink();
-        _refreshText();
     }
 
     function _refreshDrink() {
         _currentDrink = drinks.get(_currentPosition);
-    }
-
-    function _refreshText() {
-        _selectedBlock.innerHTML = _currentDrink.name;
     }
 
     function setDisplayBlock(block) {
@@ -105,7 +99,6 @@ var drinkInput = (function () {
         _currentPosition = index;
 
         _refreshDrink();
-        _refreshText();
     }
 
     function setNext() {
@@ -131,16 +124,6 @@ var drinkOutput = (function() {
     var _currentMix = [];
     var _canBeMix = false;
 
-    function _refreshText() {
-        var str = helpers.objectJoin(_currentMix, 'name', ', ');
-
-        if (!str) {
-            str = 'Empty';
-        } 
-
-        document.getElementById('drink_mixed').innerHTML = str;
-    }
-
     function _checkMix() {
         var result = cocktails.find(_currentMix);
         var mix = document.getElementById('mix');
@@ -161,7 +144,6 @@ var drinkOutput = (function() {
 
         _currentMix.push(o);
 
-        _refreshText();
         _checkMix();
     }
 
@@ -172,22 +154,12 @@ var drinkOutput = (function() {
     function dropCurrentMix() {
         _currentMix = [];
 
-        _refreshText();
         _checkMix();
-    }
-
-    function getAviableMixes() {
-        var result = cocktails.find(_currentMix);
-        var str = helpers.objectJoin(result, 'name', '<br/>');
-
-        document.getElementById('result_content').innerHTML = 'Can be mixed to: <br/>' + str;
-        document.getElementById('result').style.display = 'block';
     }
 
     return {
         addToMix: addToMix,
         dropCurrentMix: dropCurrentMix,
-        getCurrent: getCurrent,
-        getAviableMixes: getAviableMixes
+        getCurrent: getCurrent
     };
 })();
