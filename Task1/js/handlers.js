@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var drinkWater = new Drink('Water', 10, 'test');
-    var drinkJuice = new Drink('Juice', 20, 'test');
-    var drinkSugar = new Drink('Sugar', 20, 'test');
-
-    var cocktailOne = new Cocktail('Juice water', [drinkWater, drinkJuice]);
-    var cocktailSecond = new Cocktail('Sugar water', [drinkWater, drinkSugar]);
 
     var ui = {
         btnPrev: document.getElementById('drink_prev'),
@@ -17,13 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cup: document.getElementById('cup'),
         divHint: document.getElementById('hint')
     }
-
-    drinks.add(drinkWater);
-    drinks.add(drinkJuice);
-    drinks.add(drinkSugar);
-
-    cocktails.add(cocktailOne);
-    cocktails.add(cocktailSecond);
 
     drinkInput.setDisplayBlock(document.getElementById('drink_selected'));
     drinkInput.setCurrent(0);
