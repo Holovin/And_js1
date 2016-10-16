@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
         refreshDrinkInputText();
     }
 
+    function tipShow() {
+        ui.divHint.style.display = 'block';
+        ui.divHint.className += ' show';
+    }
+
+    function tipHide() {
+        ui.divHint.className = ui.divHint.className.replace('show', '');
+        ui.divHint.style.display = 'none';
+    }
+
     function refreshDrinkInputText() {
         ui.spanSelected.innerHTML = drinkInput.getCurrent().name;
     }
@@ -79,14 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
     ui.imgCup.addEventListener('dragstart', function(e) {
         e.dataTransfer.setData('drink', drinkInput.getCurrentPos());
 
-        ui.divHint.style.display = 'block';
-        ui.divHint.className += ' show';
+        tipShow();
     });
 
-    ui.imgCup.addEventListener('dragend', function() {
-        ui.divHint.className = ui.divHint.className.replace('show', '');
-        ui.divHint.style.display = 'none';
-    });
+    ui.imgCup.addEventListener('dragend', tipHide);
 
     ui.divHint.addEventListener('dragover', function(e) {
         e.preventDefault();
@@ -96,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         // cheat :p
-        drinkOutput.addToMix(drinkInput.getCurrent())
+        drinkOutput.addToMix(drinkInput.getCurrent());
         refreshDrinkOutputText();
     });
 });
