@@ -61,18 +61,20 @@ Cocktails.prototype.find = function(ingrs) {
     return result;
 };
 
-var drinkInput = (function() {
-    var _current_position;
-    var _current_drink;
+var drinkInput = (function () {
+    var _currentPosition;
+    var _currentDrink;
+    var _selectedBlock;
 
     function _setPosition(pos) {
         var total = drinks.getLength();
-        _current_position += pos;
+        _currentPosition += pos;
 
-        if (_current_position < 0) {
-            _current_position = total - 1;
-        } else if (_current_position > total - 1) {
-            _current_position = 0;
+        if (_currentPosition < 0) {
+            _currentPosition = total - 1;
+
+        } else if (_currentPosition > total - 1) {
+            _currentPosition = 0;
         }
 
         _refreshDrink();
@@ -80,97 +82,102 @@ var drinkInput = (function() {
     }
 
     function _refreshDrink() {
-        _current_drink = drinks.get(_current_position);
+        _currentDrink = drinks.get(_currentPosition);
     }
 
     function _refreshText() {
-        document.getElementById('drink_selected').innerHTML = _current_drink.name;
+        _selectedBlock.innerHTML = _currentDrink.name;
     }
 
-    function get() {
-        return _current_drink;
+    function setDisplayBlock(block) {
+        _selectedBlock = block;
     }
 
-    function getPos() {
-        return _current_position;
+    function getCurrent() {
+        return _currentDrink;
     }
 
-    function set(index) {
-        _current_position = index;
+    function getCurrentPos() {
+        return _currentPosition;
+    }
+
+    function setCurrent(index) {
+        _currentPosition = index;
 
         _refreshDrink();
         _refreshText();
     }
 
-    function next() {
+    function setNext() {
         _setPosition(1);
     }
 
-    function prev() {
+    function setPrev() {
         _setPosition(-1);
     }
 
     return {
-        get: get,
-        getPos: getPos,
-        set: set,
-        prev: prev,
-        next: next
+        getCurrent: getCurrent,
+        getCurrentPos: getCurrentPos,
+        setCurrent: setCurrent,
+        setDisplayBlock: setDisplayBlock,
+        setPrev: setPrev,
+        setNext: setNext
     };
 
 })();
 
 var drinkOutput = (function() {
-    var _current_mix = [];
-    var _can_mixed = false;
+    var _currentMix = [];
+    var _canBeMix = false;
 
     function _refreshText() {
-        var str = helpers.objectJoin(_current_mix, 'name', ', ');
+        var str = helpers.objectJoin(_currentMix, 'name', ', ');
 
         if (!str) {
-            str = "Empty";
+            str = 'Empty';
         } 
 
         document.getElementById('drink_mixed').innerHTML = str;
     }
 
     function _checkMix() {
-        var result = cocktails.find(_current_mix);
+        var result = cocktails.find(_currentMix);
         var mix = document.getElementById('mix');
 
-        _can_mixed = result.length > 0;
+        _canBeMix = result.length > 0;
 
-        mix.disabled = !_can_mixed;
+        mix.disabled = !_canBeMix;
         mix.innerHTML = 'Mix it (' + result.length + ')';
     }
 
 
-    function add(o) {
-        for (var drink of _current_mix) {
+    function addToMix(o) {
+        for (var drink of _currentMix) {
             if (drink.name === o.name) {
                 return;
             }
         }
 
-        _current_mix.push(o);
+        _currentMix.push(o);
 
         _refreshText();
         _checkMix();
     }
 
-    function get() {
-        return _current_mix;
+    function getCurrent() {
+        return _currentMix;
     }
 
-    function drop() {
-        _current_mix = [];
+    function dropCurrentMix() {
+        _currentMix = [];
 
         _refreshText();
         _checkMix();
     }
 
-    function mix() {
-        var result = cocktails.find(_current_mix);
+    function getAviableMixes() {
+        var result = cocktails.find(_currentMix);
         var str = helpers.objectJoin(result, 'name', '<br/>');
 
         document.getElementById('result_content').innerHTML = 'Can be mixed to: <br/>' + str;
@@ -178,9 +185,9 @@ var drinkOutput = (function() {
     }
 
     return {
-        add: add,
-        drop: drop,
-        get: get,
-        mix: mix
+        addToMix: addToMix,
+        dropCurrentMix: dropCurrentMix,
+        getCurrent: getCurrent,
+        getAviableMixes: getAviableMixes
     };
 })();

@@ -1,70 +1,79 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // init data //
-    var d1 = new Drink('Water', 10, 'test');
-    var d2 = new Drink('Juice', 20, 'test');
-    var d3 = new Drink('Sugar', 20, 'test');
+    var drinkWater = new Drink('Water', 10, 'test');
+    var drinkJuice = new Drink('Juice', 20, 'test');
+    var drinkSugar = new Drink('Sugar', 20, 'test');
 
-    drinks.add(d1);
-    drinks.add(d2);
-    drinks.add(d3);
+    var cocktailOne = new Cocktail('Juice water', [drinkWater, drinkJuice]);
+    var cocktailSecond = new Cocktail('Sugar water', [drinkWater, drinkSugar]);
 
-    var c1 = new Cocktail('Juice water', [d1, d2]);
-    var c2 = new Cocktail('Sugar water', [d1, d3]);
+    var ui = {
+        btnPrev: document.getElementById('drink_prev'),
+        btnNext: document.getElementById('drink_next'),
+        btnAdd: document.getElementById('add'),
+        btnDrop: document.getElementById('drop'),
+        btnMix: document.getElementById('mix'),
+        btnResult: document.getElementById('result'),
 
-    cocktails.add(c1);
-    cocktails.add(c2);
+        cup: document.getElementById('cup'),
+        divHint: document.getElementById('hint')
+    }
 
-    drinkInput.set(0);
-    drinkOutput.drop();
+    drinks.add(drinkWater);
+    drinks.add(drinkJuice);
+    drinks.add(drinkSugar);
 
-    // handling //
-    document.getElementById('drink_prev').addEventListener('click', function() {
-        drinkInput.prev();
+    cocktails.add(cocktailOne);
+    cocktails.add(cocktailSecond);
+
+    drinkInput.setDisplayBlock(document.getElementById('drink_selected'));
+    drinkInput.setCurrent(0);
+
+    drinkOutput.dropCurrentMix();
+
+    ui.btnPrev.addEventListener('click', function() {
+        drinkInput.setPrev();
     });
 
-    document.getElementById('drink_next').addEventListener('click', function() {
-        drinkInput.next();
+    ui.btnNext.addEventListener('click', function() {
+        drinkInput.setNext();
     });
  
-    document.getElementById('add').addEventListener('click', function() {
-        drinkOutput.add(drinkInput.get());
+    ui.btnAdd.addEventListener('click', function() {
+        drinkOutput.addToMix(drinkInput.getCurrent());
     });
 
-    document.getElementById('drop').addEventListener('click', function() {
-        drinkOutput.drop();
+    ui.btnDrop.addEventListener('click', function() {
+        drinkOutput.dropCurrentMix();
     }); 
 
-    document.getElementById('mix').addEventListener('click', function() {
-        drinkOutput.mix();
+    ui.btnMix.addEventListener('click', function() {
+        drinkOutput.getAviableMixes();
     });
 
-    document.getElementById('result').addEventListener('click', function() {
+    ui.btnResult.addEventListener('click', function() {
         this.style.display = 'none';
     });
 
-    var cup = document.getElementById('cup');
-    var hint = document.getElementById('hint');
-
-    cup.addEventListener('dragstart', function(e) {
+    ui.cup.addEventListener('dragstart', function(e) {
         e.dataTransfer.setData('drink', drinkInput.getPos());
 
-        hint.style.display = 'block';
-        hint.className += ' show';
+        ui.divHint.style.display = 'block';
+        ui.divHint.className += ' show';
     });
 
-    cup.addEventListener('dragend', function() {
-        hint.className = hint.className.replace('show', '' );
-        hint.style.display = 'none';
+    ui.cup.addEventListener('dragend', function() {
+        ui.divHint.className = ui.divHint.className.replace('show', '' );
+        ui.divHint.style.display = 'none';
     });
 
-    hint.addEventListener('dragover', function(e) {
+    ui.divHint.addEventListener('dragover', function(e) {
         e.preventDefault();
     });
 
-    hint.addEventListener('drop', function(e) {
+    ui.divHint.addEventListener('drop', function(e) {
         e.preventDefault();
 
         // cheat :p
-        drinkOutput.add(drinkInput.get())
+        drinkOutput.addToMix(drinkInput.getCurrent())
     });
 });
