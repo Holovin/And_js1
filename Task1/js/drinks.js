@@ -27,8 +27,6 @@ Storage.prototype.getLength = function() {
     return this.list.length;
 };
 
-var drinks = new Storage();
-
 function Cocktails() {
     Storage.call(this);
 }
@@ -39,7 +37,7 @@ Cocktails.prototype.find = function(ingrs) {
     var result = [];
     var count;
 
-    if (ingrs.length === 0) {
+    if (!ingrs.length) {
         return [];
     }
 
@@ -63,36 +61,11 @@ Cocktails.prototype.find = function(ingrs) {
     return result;
 };
 
-var cocktails = new Cocktails();
-
 var drink_input = (function() {
     var _current_position;
     var _current_drink;
 
-    function publicGet() {
-        return _current_drink;
-    }
-
-    function publicGetPos() {
-        return _current_position;
-    }
-
-    function publicSet(index) {
-        _current_position = index;
-
-        refreshDrink();
-        refreshText();
-    }
-
-    function publicNext() {
-        setPosition(1);
-    }
-
-    function publicPrev() {
-        setPosition(-1);
-    }
-
-    function setPosition(pos) {
+    function _setPosition(pos) {
         var total = drinks.getLength();
         _current_position += pos;
 
@@ -102,24 +75,47 @@ var drink_input = (function() {
             _current_position = 0;
         }
 
-        refreshDrink();
-        refreshText();
+        _refreshDrink();
+        _refreshText();
     }
 
-    function refreshDrink() {
+    function _refreshDrink() {
         _current_drink = drinks.get(_current_position);
     }
 
-    function refreshText() {
+    function _refreshText() {
         document.getElementById('drink_selected').innerHTML = _current_drink.name;
     }
 
+    function get() {
+        return _current_drink;
+    }
+
+    function getPos() {
+        return _current_position;
+    }
+
+    function set(index) {
+        _current_position = index;
+
+        _refreshDrink();
+        _refreshText();
+    }
+
+    function next() {
+        _setPosition(1);
+    }
+
+    function prev() {
+        _setPosition(-1);
+    }
+
     return {
-        get: publicGet,
-        getPos: publicGetPos,
-        set: publicSet,
-        prev: publicPrev,
-        next: publicNext
+        get: get,
+        getPos: getPos,
+        set: set,
+        prev: prev,
+        next: next
     };
 
 })();
@@ -128,31 +124,7 @@ var drink_output = (function() {
     var _current_mix = [];
     var _can_mixed = false;
 
-    function publicAdd(o) {
-        for (var drink of _current_mix) {
-            if (drink.name === o.name) {
-                return;
-            }
-        }
-
-        _current_mix.push(o);
-
-        refreshText();
-        checkMix();
-    }
-
-    function publicGet() {
-        return _current_mix;
-    }
-
-    function publicDrop() {
-        _current_mix = [];
-
-        refreshText();
-        checkMix();
-    }
-
-    function refreshText() {
+    function _refreshText() {
         var str = helpers.objectJoin(_current_mix, 'name', ', ');
 
         if (!str) {
@@ -162,17 +134,42 @@ var drink_output = (function() {
         document.getElementById('drink_mixed').innerHTML = str;
     }
 
-    function checkMix() {
+    function _checkMix() {
         var result = cocktails.find(_current_mix);
+        var mix = document.getElementById('mix');
 
         _can_mixed = result.length > 0;
 
-        var mix = document.getElementById('mix');
         mix.disabled = !_can_mixed;
         mix.innerHTML = 'Mix it (' + result.length + ')';
     }
 
-    function publicMix() {
+
+    function add(o) {
+        for (var drink of _current_mix) {
+            if (drink.name === o.name) {
+                return;
+            }
+        }
+
+        _current_mix.push(o);
+
+        _refreshText();
+        _checkMix();
+    }
+
+    function get() {
+        return _current_mix;
+    }
+
+    function drop() {
+        _current_mix = [];
+
+        _refreshText();
+        _checkMix();
+    }
+
+    function mix() {
         var result = cocktails.find(_current_mix);
         var str = helpers.objectJoin(result, 'name', '<br/>');
 
@@ -181,9 +178,9 @@ var drink_output = (function() {
     }
 
     return {
-        add: publicAdd,
-        drop: publicDrop,
-        get: publicGet,
-        mix: publicMix
+        add: add,
+        drop: drop,
+        get: get,
+        mix: mix
     };
 })();
