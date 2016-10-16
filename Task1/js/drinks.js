@@ -153,17 +153,13 @@ var drink_output = (function() {
     }
 
     function refreshText() {
-        var str = '';
-
-        for (var drink of _current_mix) {
-            str += drink.name + ', ';
-        }
+        var str = helpers.objectJoin(_current_mix, 'name', ', ');
 
         if (!str) {
-            str = "Empty.."
+            str = "Empty";
         } 
 
-        document.getElementById('drink_mixed').innerHTML = str.slice(0, -2);
+        document.getElementById('drink_mixed').innerHTML = str;
     }
 
     function checkMix() {
@@ -178,14 +174,9 @@ var drink_output = (function() {
 
     function publicMix() {
         var result = cocktails.find(_current_mix);
+        var str = helpers.objectJoin(result, 'name', '<br/>');
 
-        var str = 'Can be mixed to:' + '<br/>';
-
-        for (var cocktail of result) {
-            str += cocktail.name + '<br/>';
-        }
-
-        document.getElementById('result_content').innerHTML = str;
+        document.getElementById('result_content').innerHTML = 'Can be mixed to: <br/>' + str;
         document.getElementById('result').style.display = 'block';
     }
 
