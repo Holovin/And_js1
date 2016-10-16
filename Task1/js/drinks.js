@@ -61,7 +61,7 @@ Cocktails.prototype.find = function(ingrs) {
     return result;
 };
 
-var drink_input = (function() {
+var drinkInput = (function() {
     var _current_position;
     var _current_drink;
 
@@ -120,7 +120,7 @@ var drink_input = (function() {
 
 })();
 
-var drink_output = (function() {
+var drinkOutput = (function() {
     var _current_mix = [];
     var _can_mixed = false;
 

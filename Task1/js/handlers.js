@@ -14,28 +14,28 @@ document.addEventListener('DOMContentLoaded', function() {
     cocktails.add(c1);
     cocktails.add(c2);
 
-    drink_input.set(0);
-    drink_output.drop();
+    drinkInput.set(0);
+    drinkOutput.drop();
 
     // handling //
     document.getElementById('drink_prev').addEventListener('click', function() {
-        drink_input.prev();
+        drinkInput.prev();
     });
 
     document.getElementById('drink_next').addEventListener('click', function() {
-        drink_input.next();
+        drinkInput.next();
     });
  
     document.getElementById('add').addEventListener('click', function() {
-        drink_output.add(drink_input.get());
+        drinkOutput.add(drinkInput.get());
     });
 
     document.getElementById('drop').addEventListener('click', function() {
-        drink_output.drop();
+        drinkOutput.drop();
     }); 
 
     document.getElementById('mix').addEventListener('click', function() {
-        drink_output.mix();
+        drinkOutput.mix();
     });
 
     document.getElementById('result').addEventListener('click', function() {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var hint = document.getElementById('hint');
 
     cup.addEventListener('dragstart', function(e) {
-        e.dataTransfer.setData('drink', drink_input.getPos());
+        e.dataTransfer.setData('drink', drinkInput.getPos());
 
         hint.style.display = 'block';
         hint.className += ' show';
@@ -65,6 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         // cheat :p
-        drink_output.add(drink_input.get())
+        drinkOutput.add(drinkInput.get())
     });
 });
