@@ -28,7 +28,7 @@ Storage.prototype.getLength = function() {
 };
 
 function Cocktails() {
-    Storage.call(this);
+    Storage.apply(this);
 }
 
 Cocktails.prototype = Object.create(Storage.prototype);
