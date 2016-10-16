@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     ui.imgCup.addEventListener('dragstart', function(e) {
-        e.dataTransfer.setData('drink', drinkInput.getPos());
+        e.dataTransfer.setData('drink', drinkInput.getCurrentPos());
 
         ui.divHint.style.display = 'block';
         ui.divHint.className += ' show';
@@ -97,5 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // cheat :p
         drinkOutput.addToMix(drinkInput.getCurrent())
+        refreshDrinkOutputText();
     });
 });
