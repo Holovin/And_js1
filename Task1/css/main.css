@@ -124,6 +124,10 @@ img {
     transition: background 0.2s ease-in-out 0s;
 }
 
+#ice {
+    animation: iceiceice 2.5s infinite ease-in-out;
+}
+
 .arr_btn {
     color: #ccc;
     cursor: pointer;
@@ -155,6 +159,8 @@ button {
     cursor: pointer;
     margin: 5px;
     padding: 15px;
+
+    /* box-shadow only cause fps problems */
     transition: all 0.1s ease-in-out 0s;
 }
 
@@ -235,6 +241,7 @@ button.green {
     text-align: center;
 }
 
+
 .info {
     color: #999;
 }
@@ -247,10 +254,6 @@ button.green {
     to {
         opacity: 1;
     }
-}
-
-#ice {
-    animation: iceiceice 2.5s infinite ease-in-out;
 }
 
 @keyframes iceiceice {
