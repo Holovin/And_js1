@@ -62,6 +62,8 @@ Cocktails.prototype.find = function(ingrs) {
 };
 
 var drinkInput = (function () {
+    'use strict';
+
     var _currentPosition;
     var _currentDrink;
 
@@ -121,6 +123,8 @@ var drinkInput = (function () {
 })();
 
 var drinkOutput = (function() {
+    'use strict';
+
     var _currentMix = [];
     var _canBeMix = false;
 
