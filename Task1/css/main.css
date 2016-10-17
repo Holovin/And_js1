@@ -82,6 +82,7 @@ h2 {
 }
 
 #drink_selector {
+    line-height: 1.5;
     text-align: center;
     width: 80%;
 }
@@ -215,7 +216,7 @@ button.green {
     width: 50%;
 
     margin: 0 auto;
-    padding: 10px 10px 30px;
+    padding: 10px 10px 30px 0px;
 
     background: #FFECB3;
     border-radius: 2px;
