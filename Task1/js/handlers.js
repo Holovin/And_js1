@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function closeResultHandler(e) {
-    if (e.target.id !== 'result') {
+    if (e.target !== ui.divResult) {
       return;
     }
 
