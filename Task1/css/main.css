@@ -81,7 +81,7 @@ h2 {
     left: 50%;
 }
 
-#drink_selector {
+.drink_head {
     line-height: 1.5;
     text-align: center;
     width: 80%;
@@ -198,8 +198,9 @@ button.green {
 }
 
 #hint {
-    border: 3px dashed #999;
-    background: #ccc;
+    background: #B0BEC5;
+    outline: 3px dashed #455A64;
+    outline-offset: -20px;
     display: none;
     font-size: 18px;
     text-align: center;
@@ -237,5 +238,61 @@ button.green {
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes colors_passive {
+    0% {
+        background: #BBDEFB;
+    }
+
+    20% {
+        background: #81D4FA;
+    }
+
+    40% {
+        background: #4DD0E1;
+    }
+
+    60% {
+        background: #81D4FA;
+    }
+
+    100% {
+        background: #BBDEFB;
+    }
+}
+
+@keyframes colors_active {
+    0% {
+        background: #F44336;
+    }
+
+    15% {
+        background: #673AB7;
+    }
+
+    30% {
+        background: #2196F3;
+    }
+
+    45% {
+        background: #009688;
+    }
+
+    60% {
+        background: #8BC34A;
+    }
+
+    75% {
+        background: #FFEB3B;
+    }
+
+    90% {
+        background: #FF9800;
+    }
+
+    100% {
+        background: #F44336;
     }
 }

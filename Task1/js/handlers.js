@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     imgCup: document.getElementById('cup'),
     imgArrow: document.getElementById('arrow'),
     imgIce: document.getElementById('ice'),
+    imgCupOut: document.getElementById('cup_out'),
     divHint: document.getElementById('hint'),
 
     spanSelected: document.getElementById('drink_selected'),
@@ -25,26 +26,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
     refreshDrinkInputBlock();
     refreshDrinkOutputBlock();
+    refreshCupOut('passive');
   }
 
-  function tipShow() {
-    ui.divHint.style.display = 'block';
-    ui.divHint.className += ' show';
+  function refreshCupOut(state) {
+    switch (state) {
+      case 'passive': {
+        ui.imgCupOut.style.animation = 'colors_passive 10s infinite';
+        return;
+      }
 
-    ui.imgArrow.style.opacity = 0.25;
+      case 'active': {
+        ui.imgCupOut.style.animation = 'colors_active 5s infinite';
+        return; 
+      }
+    }
   }
 
-  function tipHide() {
-    ui.divHint.className = ui.divHint.className.replace('show', '');
-    ui.divHint.style.display = 'none';
+  function refreshTip(state) {
+    var showClassName = 'show';
 
-    ui.imgArrow.style.opacity = 0;
+    switch (state) {
+      case 'show': {
+        ui.divHint.style.display = 'block';
+        ui.divHint.className += ' ' + showClassName;
+
+        ui.imgArrow.style.opacity = 0.25;
+        return;
+      }
+
+      case 'hide': {
+        ui.divHint.className = ui.divHint.className.replace(showClassName, '');
+        ui.divHint.style.display = 'none';
+
+        ui.imgArrow.style.opacity = 0;
+        return;
+      }
+    }
   }
 
   function refreshDrinkInputBlock() {
     var current = drinkInput.getCurrent();
 
     ui.spanSelected.innerHTML = current.name;
+    ui.spanSelected.style.animation = 'show 0.4s';
+
     ui.imgCup.style.backgroundColor = current.color;
     ui.imgIce.style.opacity = current.ice ? 1 : 0;
   }
@@ -57,20 +83,29 @@ document.addEventListener('DOMContentLoaded', function() {
     var canMix = !result.length;
 
     if (!str) {
-    str = 'Empty';
+      str = 'Empty';
+      refreshCupOut('passive');
+    } else {
+      refreshCupOut('active');
     }
 
     ui.spanMixed.innerHTML = str;
+    ui.spanMixed.style.animation = 'show 0.4s';
+
     ui.btnMix.disabled = canMix;
     ui.btnMix.innerHTML = 'Mix it (' + result.length + ')';
   }
 
-  function showAviableMixes() {
+  function showAvailableMixes() {
     var result = cocktails.find(drinkOutput.getCurrent());
     var str = helpers.objectJoin(result, 'name', '<br/>');
 
     ui.divResultContent.innerHTML = 'Can be mixed to: <br/>' + str;
     ui.divResult.style.display = 'block';
+  }
+
+  function removeAnimation() {
+    this.style.animation = '';
   }
 
   resetUI();
@@ -98,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }); 
 
   ui.btnMix.addEventListener('click', function() {
-    showAviableMixes();
+    showAvailableMixes();
   });
 
   ui.btnResult.addEventListener('click', function() {
@@ -108,10 +143,12 @@ document.addEventListener('DOMContentLoaded', function() {
   ui.imgArrow.addEventListener('dragstart', function(e) {
     e.dataTransfer.setData('drink', drinkInput.getCurrentPos());
 
-    tipShow();
+    refreshTip('show');
   });
 
-  ui.imgArrow.addEventListener('dragend', tipHide);
+  ui.imgArrow.addEventListener('dragend', function () {
+    refreshTip('hide');
+  });
 
   ui.divHint.addEventListener('dragover', function(e) {
     e.preventDefault();
@@ -124,4 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     drinkOutput.addToMix(drinkInput.getCurrent());
     refreshDrinkOutputBlock();
   });
+
+  ui.spanSelected.addEventListener('animationend', removeAnimation);
+  ui.spanMixed.addEventListener('animationend', removeAnimation);
 });
