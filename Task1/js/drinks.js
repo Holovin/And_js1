@@ -4,9 +4,10 @@ function Drink(name, alcohol, color) {
   this.color = color;
 }
 
-function Cocktail(name, ingrs) {
+function Cocktail(name, ingrs, color) {
   this.name = name;
   this.ingrs = ingrs;
+  this.color = color;
 }
 
 function Storage() {

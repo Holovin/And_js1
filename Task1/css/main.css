@@ -86,12 +86,26 @@ h2 {
     width: 80%;
 }
 
+#drink_selector_disp {
+    position: relative;
+}
+
+.img_over {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out 0s;
+}
+
 .drink_name {
     display: inline-block;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: all 0.1s ease-in-out 0s;
 }
 
 #drink_selected {
@@ -104,8 +118,9 @@ h2 {
     padding: 10px 0;
 }
 
-.cup {
+img {
     width: 150px;
+    transition: background 0.2s ease-in-out 0s;
 }
 
 .arr_btn {

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     drinkInput.setCurrent(helpers.getRandomInt(0, drinks.getLength()));
     drinkOutput.dropCurrentMix();
 
-    refreshDrinkInputText();
+    refreshDrinkInputBlock();
     refreshDrinkOutputBlock();
   }
 
@@ -37,6 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function refreshDrinkInputText() {
     ui.spanSelected.innerHTML = drinkInput.getCurrent().name;
+    var current = drinkInput.getCurrent();
+
+    ui.spanSelected.innerHTML = current.name;
+    ui.imgCup.style.backgroundColor = current.color;
   }
 
   function refreshDrinkOutputBlock() {
@@ -67,12 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   ui.btnPrev.addEventListener('click', function() {
     drinkInput.setPrev();
-    refreshDrinkInputText();
+    refreshDrinkInputBlock();
   });
 
   ui.btnNext.addEventListener('click', function() {
     drinkInput.setNext();
-    refreshDrinkInputText();
+    refreshDrinkInputBlock();
   });
  
   ui.btnAdd.addEventListener('click', function() {

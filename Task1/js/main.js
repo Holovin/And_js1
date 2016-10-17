@@ -5,9 +5,9 @@ var cocktails = new Cocktails();
 
 (function() {
   // hide from window scope
-  var drinkWater = new Drink('Water', 10, 'test');
-  var drinkJuice = new Drink('Juice', 20, 'test');
-  var drinkSugar = new Drink('Sugar', 20, 'test');
+  var drinkWater = new Drink('Water', true, 'blue');
+  var drinkJuice = new Drink('Juice', false, 'orange');
+  var drinkSugar = new Drink('Sugar', false, '#999');
 
   var cocktailOne = new Cocktail('Juice water', [drinkWater, drinkJuice]);
   var cocktailSecond = new Cocktail('Sugar water', [drinkWater, drinkSugar]);
