@@ -183,7 +183,7 @@ button.green {
     background: #81C784;
 }
 
-.mosttop {
+.overlay {
     position: absolute;
     left: 0;
     top: 0;
@@ -192,15 +192,15 @@ button.green {
     z-index: 999;
 }
 
-.mosttop.show {
-    animation-name: show;
-    animation-duration: 1s;
+.overlay.show {
+    animation: show 1s;
 }
 
 #hint {
     background: #B0BEC5;
     outline: 3px dashed #455A64;
     outline-offset: -20px;
+
     display: none;
     font-size: 18px;
     text-align: center;
@@ -213,6 +213,14 @@ button.green {
 }
 
 #result {
+    display: none;
+    position: fixed;
+    padding: 100px;
+    height: 100%;
+    width: 100%;
+}
+
+#result_inner {
     left: 25%;
     width: 50%;
 
@@ -223,7 +231,7 @@ button.green {
     border-radius: 2px;
     box-shadow: 0 5px 100px -10px rgba(0, 0, 0, 0.35);
     border-bottom: 2px solid #FFC107;
-    display: none;
+    cursor: default;
     text-align: center;
 }
 

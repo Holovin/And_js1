@@ -102,6 +102,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     ui.divResultContent.innerHTML = 'Can be mixed to: <br/>' + str;
     ui.divResult.style.display = 'block';
+    ui.divResult.addEventListener('click', closeResultHandler);
+  }
+
+  function closeResultHandler(e) {
+    if (e.target.id !== 'result') {
+      return;
+    }
+
+    ui.divResult.style.display = 'none';
+    ui.divResult.removeEventListener('click', closeResultHandler);
   }
 
   function removeAnimation() {
@@ -134,10 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   ui.btnMix.addEventListener('click', function() {
     showAvailableMixes();
-  });
-
-  ui.btnResult.addEventListener('click', function() {
-    this.style.display = 'none';
   });
 
   ui.imgArrow.addEventListener('dragstart', function(e) {
