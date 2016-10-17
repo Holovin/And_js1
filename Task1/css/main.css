@@ -197,13 +197,12 @@ button.green {
 
 #result {
     left: 25%;
-    top: 5%;
-    height: 50%;
     width: 50%;
 
     margin: 0 auto;
-    background: #FFECB3;
+    padding: 10px 10px 30px;
 
+    background: #FFECB3;
     border-radius: 2px;
     box-shadow: 0 5px 100px -10px rgba(0, 0, 0, 0.35);
     border-bottom: 2px solid #FFC107;
