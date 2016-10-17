@@ -1,6 +1,6 @@
-function Drink(name, alcohol, color) {
+function Drink(name, ice, color) {
   this.name = name;
-  this.alcohol = alcohol;
+  this.ice = ice;
   this.color = color;
 }
 

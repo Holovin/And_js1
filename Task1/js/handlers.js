@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     btnResult: document.getElementById('result'),
 
     imgCup: document.getElementById('cup'),
+    imgArrow: document.getElementById('arrow'),
+    imgIce: document.getElementById('ice'),
     divHint: document.getElementById('hint'),
 
     spanSelected: document.getElementById('drink_selected'),
@@ -28,19 +30,23 @@ document.addEventListener('DOMContentLoaded', function() {
   function tipShow() {
     ui.divHint.style.display = 'block';
     ui.divHint.className += ' show';
+
+    ui.imgArrow.style.opacity = 0.25;
   }
 
   function tipHide() {
     ui.divHint.className = ui.divHint.className.replace('show', '');
     ui.divHint.style.display = 'none';
+
+    ui.imgArrow.style.opacity = 0;
   }
 
-  function refreshDrinkInputText() {
-    ui.spanSelected.innerHTML = drinkInput.getCurrent().name;
+  function refreshDrinkInputBlock() {
     var current = drinkInput.getCurrent();
 
     ui.spanSelected.innerHTML = current.name;
     ui.imgCup.style.backgroundColor = current.color;
+    ui.imgIce.style.opacity = current.ice ? 1 : 0;
   }
 
   function refreshDrinkOutputBlock() {
@@ -99,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function() {
     this.style.display = 'none';
   });
 
-  ui.imgCup.addEventListener('dragstart', function(e) {
+  ui.imgArrow.addEventListener('dragstart', function(e) {
     e.dataTransfer.setData('drink', drinkInput.getCurrentPos());
 
     tipShow();
   });
 
-  ui.imgCup.addEventListener('dragend', tipHide);
+  ui.imgArrow.addEventListener('dragend', tipHide);
 
   ui.divHint.addEventListener('dragover', function(e) {
     e.preventDefault();
