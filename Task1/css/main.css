@@ -114,6 +114,7 @@ h2 {
     padding: 0 5px;
     color: #ccc;
     cursor: pointer;
+    vertical-align: bottom;
 
     -webkit-touch-callout: none; 
     -webkit-user-select: none;   
