@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ui.divHint.style.display = 'block';
         ui.divHint.className += ' ' + showClassName;
 
-        ui.imgArrow.style.opacity = 0.25;
         return;
       }
 
@@ -59,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ui.divHint.className = ui.divHint.className.replace(showClassName, '');
         ui.divHint.style.display = 'none';
 
-        ui.imgArrow.style.opacity = 0;
         return;
       }
     }
