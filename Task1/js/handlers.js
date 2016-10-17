@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   function resetUI() {
-    drinkInput.setCurrent(0);
+    drinkInput.setCurrent(helpers.getRandomInt(0, drinks.getLength()));
     drinkOutput.dropCurrentMix();
 
     refreshDrinkInputText();
