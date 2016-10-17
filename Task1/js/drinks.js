@@ -128,17 +128,6 @@ var drinkOutput = (function() {
   var _currentMix = [];
   var _canBeMix = false;
 
-  function _checkMix() {
-    var result = cocktails.find(_currentMix);
-    var mix = document.getElementById('mix');
-
-    _canBeMix = result.length > 0;
-
-    mix.disabled = !_canBeMix;
-    mix.innerHTML = 'Mix it (' + result.length + ')';
-  }
-
-
   function addToMix(o) {
     for (var drink of _currentMix) {
       if (drink.name === o.name) {
@@ -147,8 +136,6 @@ var drinkOutput = (function() {
     }
 
     _currentMix.push(o);
-
-    _checkMix();
   }
 
   function getCurrent() {
@@ -157,8 +144,6 @@ var drinkOutput = (function() {
 
   function dropCurrentMix() {
     _currentMix = [];
-
-    _checkMix();
   }
 
   return {

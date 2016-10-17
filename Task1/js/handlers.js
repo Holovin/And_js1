@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     drinkOutput.dropCurrentMix();
 
     refreshDrinkInputText();
+    refreshDrinkOutputBlock();
   }
 
   function tipShow() {
@@ -38,14 +39,20 @@ document.addEventListener('DOMContentLoaded', function() {
     ui.spanSelected.innerHTML = drinkInput.getCurrent().name;
   }
 
-  function refreshDrinkOutputText() {
-    var str = helpers.objectJoin(drinkOutput.getCurrent(), 'name', ', ');
+  function refreshDrinkOutputBlock() {
+    var current = drinkOutput.getCurrent();
+
+    var str = helpers.objectJoin(current, 'name', ', ');
+    var result = cocktails.find(current);
+    var canMix = !result.length;
 
     if (!str) {
     str = 'Empty';
     }
 
     ui.spanMixed.innerHTML = str;
+    ui.btnMix.disabled = canMix;
+    ui.btnMix.innerHTML = 'Mix it (' + result.length + ')';
   }
 
   function showAviableMixes() {
@@ -70,12 +77,14 @@ document.addEventListener('DOMContentLoaded', function() {
  
   ui.btnAdd.addEventListener('click', function() {
     drinkOutput.addToMix(drinkInput.getCurrent());
-    refreshDrinkOutputText();
+    
+    refreshDrinkOutputBlock();
   });
 
   ui.btnDrop.addEventListener('click', function() {
     drinkOutput.dropCurrentMix();
-    refreshDrinkOutputText();
+    
+    refreshDrinkOutputBlock();
   }); 
 
   ui.btnMix.addEventListener('click', function() {
@@ -103,6 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // cheat :p
     drinkOutput.addToMix(drinkInput.getCurrent());
-    refreshDrinkOutputText();
+    refreshDrinkOutputBlock();
   });
 });
