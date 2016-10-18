@@ -86,10 +86,6 @@ var drinkInput = (function () {
     _currentDrink = drinks.get(_currentPosition);
   }
 
-  function setDisplayBlock(block) {
-    _selectedBlock = block;
-  }
-
   function getCurrent() {
     return _currentDrink;
   }
@@ -116,7 +112,6 @@ var drinkInput = (function () {
     getCurrent: getCurrent,
     getCurrentPos: getCurrentPos,
     setCurrent: setCurrent,
-    setDisplayBlock: setDisplayBlock,
     setPrev: setPrev,
     setNext: setNext
   };
