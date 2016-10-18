@@ -11,22 +11,23 @@ html, body {
 
 body {
     font-family: Arial, serif;
-    font-size: 14px;    
+    font-size: 14px;
+    background: #FFF8E1;
 }
 
 #wrap {
     min-height: 100%;
+    min-width: 600px;
     position: relative;
 }
 
 header {
-    color: #FFF;
     background: #6A1B9A;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15);
+    color: #FFF;
 
-    position: relative;
-    z-index: 99;
     overflow: hidden;
+    z-index: 99;
 }
 
 header a {
@@ -35,40 +36,40 @@ header a {
 
 #source {
     float: right;
+    font-size: 10px;
+    line-height: 1.5;
     padding: 15px 35px;
-    overflow: hidden;
+    text-align: right;
 }
 
 #logo {
-    font-size: 16px;
-    padding: 15px 35px;
+    font-size: 22px;
     float: left;
+    padding: 20px 35px;
+    vertical-align: middle;
 }
 
 main {
-    padding: 10px 10px 50px;
-    background: #FFF8E1;
-
     position: relative;
-    height: 95%;
+    padding: 10px 10px 50px;
 }
 
 h2 {
     font-size: 24px;
-    text-align: center;
     padding: 10px;
+    text-align: center;
 }
 
 #input, #output {
-    float: left;
-    width: 50%;
-    padding: 10px;
-
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
     position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    
+    float: left;
+    padding: 10px;
+    width: 50%;
     z-index: 100;
 }
 
@@ -80,18 +81,32 @@ h2 {
     left: 50%;
 }
 
-#drink_selector {
-    width: 80%;
+.drink_head {
+    line-height: 1.5;
     text-align: center;
+    width: 80%;
+}
+
+#drink_selector_disp {
+    position: relative;
+}
+
+.img_over {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out 0s;
 }
 
 .drink_name {
     display: inline-block;
-    padding: 1px;
 
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.1s ease-in-out 0s;
 }
 
 #drink_selected {
@@ -104,16 +119,22 @@ h2 {
     padding: 10px 0;
 }
 
-.cup {
+img {
     width: 150px;
+    transition: background 0.2s ease-in-out 0s;
+}
+
+#ice {
+    animation: iceiceice 2.5s infinite ease-in-out;
 }
 
 .arr_btn {
-    display: inline-block;
-    width: 25%;
-    padding: 0 5px;
     color: #ccc;
     cursor: pointer;
+    display: inline-block;
+    padding: 0 5px;
+    width: 25%;
+    vertical-align: bottom;
 
     -webkit-touch-callout: none; 
     -webkit-user-select: none;   
@@ -132,12 +153,14 @@ button, button:active, button:focus, button:hover {
 }
 
 button {
-    margin: 5px;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 4px;
     border: 0;
+    border-radius: 4px;
     box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15), 0 6px 6px -6px rgba(10, 10, 10, 0.25);
+    cursor: pointer;
+    margin: 5px;
+    padding: 15px;
+
+    /* box-shadow only cause fps problems */
     transition: all 0.1s ease-in-out 0s;
 }
 
@@ -166,44 +189,58 @@ button.green {
     background: #81C784;
 }
 
-.mosttop {
+.overlay {
     position: absolute;
-    top: 0;
     left: 0;
-    z-index: 999;
+    top: 0;
+
     cursor: pointer;
+    z-index: 999;
 }
 
-.mosttop.show {
-    animation-name: show;
-    animation-duration: 1s;
+.overlay.show {
+    animation: show 1s;
 }
 
 #hint {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    background: #ccc;
-    padding: 100px;
-    font-size: 18px;
+    background: #B0BEC5;
+    outline: 3px dashed #455A64;
+    outline-offset: -20px;
+
     display: none;
+    font-size: 18px;
+    text-align: center;
+    padding: 200px 100px;
+  
+    position: fixed;
+    left: 50%;
+    height: 100%;
+    width: 50%;
 }
 
-#result {
+#modal {
+    display: none;
+    position: fixed;
+    padding: 100px;
+    height: 100%;
+    width: 100%;
+}
+
+#modal_inner {
     left: 25%;
-    top: 5%;
-
     width: 50%;
-    height: 50%;
-    margin: 0 auto;
-    background: #FFECB3;
 
+    margin: 0 auto;
+    padding: 10px 10px 30px 0px;
+
+    background: #FFECB3;
     border-radius: 2px;
     box-shadow: 0 5px 100px -10px rgba(0, 0, 0, 0.35);
     border-bottom: 2px solid #FFC107;
+    cursor: default;
     text-align: center;
-    display: none;
 }
+
 
 .info {
     color: #999;
@@ -216,5 +253,75 @@ button.green {
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes iceiceice {
+    0% {
+        margin-top: 0px;
+    }
+
+    50% {
+        margin-top: 5px;
+    }
+
+    100% {
+        margin-top: 0px;
+    }
+}
+
+@keyframes colors_passive {
+    0% {
+        background: #BBDEFB;
+    }
+
+    20% {
+        background: #81D4FA;
+    }
+
+    40% {
+        background: #4DD0E1;
+    }
+
+    60% {
+        background: #81D4FA;
+    }
+
+    100% {
+        background: #BBDEFB;
+    }
+}
+
+@keyframes colors_active {
+    0% {
+        background: #F44336;
+    }
+
+    15% {
+        background: #673AB7;
+    }
+
+    30% {
+        background: #2196F3;
+    }
+
+    45% {
+        background: #009688;
+    }
+
+    60% {
+        background: #8BC34A;
+    }
+
+    75% {
+        background: #FFEB3B;
+    }
+
+    90% {
+        background: #FF9800;
+    }
+
+    100% {
+        background: #F44336;
     }
 }

@@ -3,28 +3,30 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
-        <title>D_and_task_1</title>
+        <title>D / And / Task / 1</title>
     </head>
 
     <body>
         <div id="wrap">
             <header>
                 <div id="logo">D / And / Task 1</div>
-                <div id="source">Source code: <a href="https://bitbucket.org/DJ_miXxXer/d_and_js/src">BitBucket</a> or <a href="https://github.com/Holovin/D_and_js">GitHub</a>. </div>
+                <div id="source">Source code <a href="https://github.com/Holovin/D_and_js">GitHub</a>.<br/> Also see my other projects at <a href="https://bitbucket.org/DJ_miXxXer">BitBucket</a>.</div>
             </header>
 
             <main>
                 <div id="input">
                     <h2>Input drink</h2>
 
-                    <div class="center" id="drink_selector">
+                    <div class="center drink_head" id="drink_selector">
                         <div class="arr_btn" id="drink_prev">< Prev</div>
                         <div class="drink_name" id="drink_selected">[selected drink]</div>
                         <div class="arr_btn" id="drink_next">Next ></div>
                     </div>
 
                     <div class="center" id="drink_selector_disp">
-                        <img id="cup" src="img/drink.png" draggable="true" class="cup">
+                        <img id="cup" src="img/drink.png"/>
+                        <img id="ice" class="img_over" src="img/ice.png"/>
+                        <img id="arrow" src="img/arrow.png" class="img_over" draggable="true"/>
                     </div>
 
                     <div class="center">
@@ -32,44 +34,45 @@
                     </div>
 
                     <div class="center">
-                        <span class="info">...or just drag'n'drop it to right</span>
+                        <span class="info">...or just drag'n'drop glass to right</span>
                     </div>
-
-
                 </div>
 
                 <div id="output">
                     <h2>Output drink</h2>
 
-                    <div class="center">
+                    <div class="center drink_head">
                         <div class="drink_name" id="drink_mixed">Empty</div>
                     </div>
 
                     <div class="center">
-                        <img src="img/drink.png" class="cup">
+                        <img src="img/drink.png" id="cup_out">
                     </div>
 
                     <div class="center">
                         <button class="lime" id="mix" disabled="disabled">Mix it</button>
-                        <button class="red" id="drop">Drop the cup</button>
+                        <button class="red" id="drop">Clear cup</button>
                     </div>
 
-                    <div class="mosttop" id="hint">
+                    <div class="overlay" id="hint">
                     Move it here!
                     </div>
                 </div>
 
-                <div id="result" class="mosttop">
-                    <h2>Mix results</h2>
-                    <div id="result_content"></div>
+                <div id="modal" class="overlay">
+                    <div id="modal_inner">
+                        <h2 id="modal_header"></h2>
+                        <div id="modal_content"></div>
+                        <br/>
+                        <div class="info">(click out of block to close)</div>
+                    </div>
                 </div>
             </main>
         </div>
 
-    <script src="js/helpers.js"></script>
-    <script src="js/drinks.js"></script>
-    <script src="js/handlers.js"></script>
-    <script src="js/main.js"></script>
+        <script src="js/helpers.js"></script>
+        <script src="js/drinks.js"></script>
+        <script src="js/handlers.js"></script>
+        <script src="js/main.js"></script>
     </body>
-
 </html>

@@ -1,12 +1,13 @@
-function Drink(name, alcohol, color) {
+function Drink(name, ice, color) {
   this.name = name;
-  this.alcohol = alcohol;
+  this.ice = ice;
   this.color = color;
 }
 
-function Cocktail(name, ingrs) {
+function Cocktail(name, ingrs, color) {
   this.name = name;
   this.ingrs = ingrs;
+  this.color = color;
 }
 
 function Storage() {
@@ -85,10 +86,6 @@ var drinkInput = (function () {
     _currentDrink = drinks.get(_currentPosition);
   }
 
-  function setDisplayBlock(block) {
-    _selectedBlock = block;
-  }
-
   function getCurrent() {
     return _currentDrink;
   }
@@ -115,7 +112,6 @@ var drinkInput = (function () {
     getCurrent: getCurrent,
     getCurrentPos: getCurrentPos,
     setCurrent: setCurrent,
-    setDisplayBlock: setDisplayBlock,
     setPrev: setPrev,
     setNext: setNext
   };

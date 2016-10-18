@@ -7,8 +7,13 @@ var helpers = (function () {
     }).join(sep);
   }
 
-   return {
-    objectJoin: objectJoin
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
+
+  return {
+    objectJoin: objectJoin,
+    getRandomInt: getRandomInt
+  };
 
 })();
