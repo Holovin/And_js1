@@ -28,6 +28,25 @@ document.addEventListener('DOMContentLoaded', function() {
     refreshDrinkInputBlock();
     refreshDrinkOutputBlock();
     refreshCupOut('passive');
+
+    welcomeScreen();
+  }
+
+  function welcomeScreen() {
+    var cookieData = "was_here=true";
+
+    if (document.cookie.indexOf(cookieData) > -1) {
+      return;
+    }
+
+    document.cookie = cookieData;
+
+    showModalWindow('Welcome!', '1. Select some items from "Input drink"<br/>' + 
+      '2. Add them with "Add button" or with drag&#39;n&#39;drop <br/>' + 
+      '3. Look at "Mix it" button and press it when all necessary ingredients added <br/>' +
+      '4. Check cocktails which you can mix <br/>' +
+      '5. ??? <br/>' + 
+      '6. Mix and drink it!');
   }
 
   function refreshCupOut(state) {
