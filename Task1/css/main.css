@@ -218,7 +218,7 @@ button.green {
     width: 50%;
 }
 
-#result {
+#modal {
     display: none;
     position: fixed;
     padding: 100px;
@@ -226,7 +226,7 @@ button.green {
     width: 100%;
 }
 
-#result_inner {
+#modal_inner {
     left: 25%;
     width: 50%;
 

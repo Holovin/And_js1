@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     spanSelected: document.getElementById('drink_selected'),
     spanMixed: document.getElementById('drink_mixed'),
 
-    divResult: document.getElementById('result'),
-    divResultContent: document.getElementById('result_content')
+    divModal: document.getElementById('modal'),
+    divModalHeader: document.getElementById('modal_header'),
+    divModalContent: document.getElementById('modal_content')
   };
 
   function resetUI() {
@@ -98,18 +99,23 @@ document.addEventListener('DOMContentLoaded', function() {
     var result = cocktails.find(drinkOutput.getCurrent());
     var str = helpers.objectJoin(result, 'name', '<br/>');
 
-    ui.divResultContent.innerHTML = 'Can be mixed to: <br/>' + str;
-    ui.divResult.style.display = 'block';
-    ui.divResult.addEventListener('click', closeResultHandler);
+    showModalWindow('Result mix', 'Can be mixed to: <br/>' + str);
+  }
+
+  function showModalWindow(header, inner) {
+    ui.divModalHeader.innerHTML = header;
+    ui.divModalContent.innerHTML = inner;
+    ui.divModal.style.display = 'block';
+    ui.divModal.addEventListener('click', closeResultHandler);
   }
 
   function closeResultHandler(e) {
-    if (e.target !== ui.divResult) {
+    if (e.target !== ui.divModal) {
       return;
     }
 
-    ui.divResult.style.display = 'none';
-    ui.divResult.removeEventListener('click', closeResultHandler);
+    ui.divModal.style.display = 'none';
+    ui.divModal.removeEventListener('click', closeResultHandler);
   }
 
   function removeAnimation() {
