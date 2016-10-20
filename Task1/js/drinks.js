@@ -33,7 +33,7 @@ function Cocktails() {
 }
 
 Cocktails.prototype = Object.create(Storage.prototype);
-Cocktails.prototype.constructor = Storage;
+Cocktails.prototype.constructor = Cocktails;
 Cocktails.prototype.find = function(ingrs) {
   var result = [];
   var count;
